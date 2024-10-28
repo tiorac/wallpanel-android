@@ -298,6 +298,11 @@
     <string name="pref_web_screen_url_title">Web Screensaver Url</string>
     <string name="pref_web_screen_url_description">Enter the url to use as a web screensaver.</string>
 
+    <string name="pref_settings_to_escape_default">false</string>
+    <string name="pref_settings_to_escape_key">pref_escape_to_settings</string>
+    <string name="pref_settings_to_escape_title">Enable Escape Button</string>
+    <string name="pref_settings_to_escape_summary">When active, the escape keyboard button opens the settings.</string>
+
 
     <string-array name="flip_directions">
         <item>None</item>

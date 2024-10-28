@@ -121,6 +121,12 @@
             android:entries="@array/settings_location_labels"
             android:entryValues="@array/settings_location_values"/>
 
+        <SwitchPreference
+            android:defaultValue="@string/pref_settings_to_escape_default"
+            android:key="@string/pref_settings_to_escape_key"
+            android:title="@string/pref_settings_to_escape_title"
+            android:summary="@string/pref_settings_to_escape_summary"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preference_title_screen">

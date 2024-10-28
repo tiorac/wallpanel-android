@@ -343,6 +343,10 @@ constructor(private val context: Context, private val sharedPreferences: SharedP
         get() = this.sharedPreferences.getBoolean(PREF_SCREEN_BRIGHTNESS, false)
         set(value) = this.sharedPreferences.edit().putBoolean(PREF_SCREEN_BRIGHTNESS, value).apply()
 
+    var escapeToSettings: Boolean
+        get() = this.sharedPreferences.getBoolean(PREF_ESCAPE_TO_SETTINGS, false)
+        set(value) = this.sharedPreferences.edit().putBoolean(PREF_ESCAPE_TO_SETTINGS, value).apply()
+
     val ignoreSSLErrors: Boolean
         get() = getBoolPref(R.string.key_setting_ignore_ssl_errors,
                 R.string.default_setting_ignore_ssl_errors)
@@ -396,6 +400,7 @@ constructor(private val context: Context, private val sharedPreferences: SharedP
         private val PREF_CAMERA_MOTION_LATENCY = "pref_camera_motion_latency"
         private val PREF_WEB_SCREENSAVER_URL = "pref_web_screensaver_url"
         private val PREF_WEB_SCREENSAVER = "pref_web_screensaver"
+        const val PREF_ESCAPE_TO_SETTINGS = "pref_escape_to_settings"
         const val WEB_SCREEN_SAVER = "https://thanksmister.com/mqtt_alarm_panel/gif_background.html"
     }
 }

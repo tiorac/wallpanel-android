@@ -107,11 +107,12 @@ class BrowserActivityNative : BaseBrowserActivity(), LifecycleObserver {
         }
 
         launchSettingsFab.setOnClickListener {
-            if (configuration.isFirstTime) {
+            this.openSettingsOrShowCode()
+            /*if (configuration.isFirstTime) {
                 openSettings()
             } else {
                 showCodeBottomSheet()
-            }
+            }*/
         }
 
         connectionLiveData = ConnectionLiveData(this)
@@ -345,6 +346,16 @@ class BrowserActivityNative : BaseBrowserActivity(), LifecycleObserver {
         }
     }
 
+    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
+        if (event?.action == KeyEvent.ACTION_UP
+            && event.keyCode == KeyEvent.KEYCODE_ESCAPE
+            && configuration.escapeToSettings) {
+            openSettingsOrShowCode()
+        }
+
+        return super.dispatchKeyEvent(event)
+    }
+
     private fun initWebPageLoad() {
         progressView.visibility = View.GONE
         mWebView.visibility = View.VISIBLE
@@ -419,6 +430,14 @@ class BrowserActivityNative : BaseBrowserActivity(), LifecycleObserver {
             }
         } else {
             webkitPermissionRequest?.grant(webkitPermissionRequest?.resources)
+        }
+    }
+
+    private fun openSettingsOrShowCode() {
+        if (configuration.isFirstTime) {
+            openSettings()
+        } else {
+            showCodeBottomSheet()
         }
     }
 
