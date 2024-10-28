@@ -303,6 +303,11 @@
     <string name="pref_settings_to_escape_title">Enable Escape Button</string>
     <string name="pref_settings_to_escape_summary">When active, the escape keyboard button opens the settings.</string>
 
+    <string name="pref_settings_home_button_default">false</string>
+    <string name="pref_settings_home_button_key">pref_home_button</string>
+    <string name="pref_settings_home_button_title">Enable Home Button</string>
+    <string name="pref_settings_home_button_summary">When enabled, the floating action button goes to home on click and to settings when hold for more than 3 seconds</string>
+
 
     <string-array name="flip_directions">
         <item>None</item>

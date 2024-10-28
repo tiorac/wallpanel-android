@@ -106,14 +106,34 @@ class BrowserActivityNative : BaseBrowserActivity(), LifecycleObserver {
             return
         }
 
-        launchSettingsFab.setOnClickListener {
-            this.openSettingsOrShowCode()
-            /*if (configuration.isFirstTime) {
-                openSettings()
-            } else {
-                showCodeBottomSheet()
-            }*/
-        }
+        launchSettingsFab.setOnTouchListener(object : View.OnTouchListener {
+            private var clickTime: Date = Date()
+
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                when (event?.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        clickTime = Date()
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if (configuration.homeButton && !configuration.settingsDisabled) {
+                            if (Date().time - clickTime.time < 3000) {
+                                mWebView.loadUrl(configuration.appLaunchUrl)
+                            } else {
+                                openSettingsOrShowCode()
+                            }
+                        }
+                        else if (!configuration.homeButton) {
+                            openSettingsOrShowCode()
+                        }
+                        else {
+                            mWebView.loadUrl(configuration.appLaunchUrl)
+                        }
+                    }
+                }
+                return true
+            }
+        })
+
 
         connectionLiveData = ConnectionLiveData(this)
         connectionLiveData?.observe(this, { connected ->
@@ -483,7 +503,7 @@ class BrowserActivityNative : BaseBrowserActivity(), LifecycleObserver {
         }
         launchSettingsFab.layoutParams = params
         when {
-            configuration.settingsDisabled -> {
+            configuration.settingsDisabled && !configuration.homeButton -> {
                 launchSettingsFab.visibility = View.GONE
             }
             configuration.settingsTransparent -> {
